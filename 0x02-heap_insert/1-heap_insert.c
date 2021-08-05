@@ -1,8 +1,31 @@
 #include "binary_trees.h"
 
-void swap(binary_tree_t *tree, binary_tree_t *new)
+binary_tree_t *swap(binary_tree_t *new)
 {
-	
+	binary_tree_t *tmp;
+
+	while(new->parent && new->parent->n < new->n)
+	{
+		binary_tree_t *old_parent = new->parent;
+
+		if (new->left)
+			new->left->parent = old_parent;
+		if (new->right)
+			new->right->parent = old_parent;
+		if (old_parent->right)
+			old_parent->right->parent = new;
+		new->parent = old_parent->parent;
+		old_parent->parent = new;
+		tmp = old_parent->right;
+		old_parent->right = new->right;
+		new->right = tmp;
+		old_parent->left = new->left;
+		new->left = old_parent;
+	}
+	tmp = new;
+	while(tmp->parent)
+		tmp = tmp->parent;
+	return (tmp);
 }
 
 struct next_result next(binary_tree_t *tree)
