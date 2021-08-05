@@ -1,22 +1,40 @@
 #include "binary_trees.h"
 
-/**
-* binary_tree_height - measures the height of a tree
-* @root: root of tree to measure
-*
-* Return: size of binary tree or 0 on failure
-*/
-int binary_tree_height(const binary_tree_t *root)
+void swap(binary_tree_t *tree, binary_tree_t *new)
 {
-	int height = 1;
-
-	while (root->left)
-	{
-		height++;
-		root = root->left;
-	}
-	return (height);
+	
 }
+
+struct next_result next(binary_tree_t *tree)
+{
+	struct next_result next_left = {0, NULL}, next_right = {0, NULL};
+	struct next_result nil = {0, NULL};
+
+	if (!tree->left)
+	{
+		next_left.p = &(tree->left);
+		return (next_left);
+	}
+	else if (!tree->right)
+	{
+		next_right.p = &(tree->right);
+		return (next_right);
+	}
+	else
+	{
+		next_left = next(tree->left);
+		next_left.level++;
+		next_right = next(tree->right);
+		next_right.level++;
+		if (next_left.level <= next_right.level)
+			return (next_left);
+		else
+			return (next_right);
+	}
+        /* this can't happen. return statement is for compilation purposes */
+	return (nil);
+}
+
 
 /**
  * heap_insert - inserts a value into a Max Binary Heap
@@ -28,7 +46,6 @@ int binary_tree_height(const binary_tree_t *root)
 heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new;
-	heap_t *current;
 
 	if (!root)
 		return (NULL);
@@ -39,7 +56,5 @@ heap_t *heap_insert(heap_t **root, int value)
 		*root = new;
 		return (new);
 	}
-
-	height = binary_tree_height(*root);
-	printf("%d\n", height);
+	return (NULL);
 }

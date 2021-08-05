@@ -24,8 +24,15 @@ typedef struct binary_tree_s
 
 typedef struct binary_tree_s heap_t;
 
+struct next_result
+{
+	int level;
+	binary_tree_t **p;
+};
+
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
+struct next_result next(binary_tree_t *tree);
 
 #endif /* BINARY_TREES_H */
