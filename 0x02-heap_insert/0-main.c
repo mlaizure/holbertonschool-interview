@@ -35,21 +35,14 @@ int main(void)
     root->right->left = binary_tree_node(root->right, 256);
     root->right->right = binary_tree_node(root->right, 512);
 
+    root->right->right->right = binary_tree_node(root, 402);
+    root->right->right->left = binary_tree_node(root->right, 256);
+    root->right->left->right = binary_tree_node(root->right, 512);
+    root->right->left->left = binary_tree_node(root->right, 512);
+
     binary_tree_print(root);
 
-    root->left->n = 700;
-    binary_tree_t *a = root;
-    binary_tree_t *b = root->left;
-    root = swap(root->left);
-    if (b->parent)
-	    printf("root node has parent\n");
-    if (a->parent != b)
-	    printf("bad parent\n");
-    if (b->left != a)
-	    printf("3\n");
-    if (b->right != a->right)
-	    printf("farts\n");
-    printf("before second print\n");
+    root = swap(root->right);
     binary_tree_print(root);
 
     struct next_result nx = next(root);

@@ -28,6 +28,7 @@ struct next_result
 {
 	int level;
 	binary_tree_t **p;
+	binary_tree_t *parent;
 };
 
 void binary_tree_print(const binary_tree_t *);
