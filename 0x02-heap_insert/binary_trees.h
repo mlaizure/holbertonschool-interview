@@ -24,17 +24,25 @@ typedef struct binary_tree_s
 
 typedef struct binary_tree_s heap_t;
 
-struct next_result
+/**
+ * struct next_result - info for next available spot to insert into tree
+ *
+ * @level: level the node will be added on
+ * @p: pointer to spot to add node
+ * @parent: pointer to parent of spot to add node
+ */
+
+typedef struct next_result
 {
 	int level;
 	binary_tree_t **p;
 	binary_tree_t *parent;
-};
+} next_res;
 
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
-struct next_result next(binary_tree_t *tree);
+next_res next(binary_tree_t *tree);
 binary_tree_t *swap(binary_tree_t *new);
 
 #endif /* BINARY_TREES_H */

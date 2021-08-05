@@ -1,70 +1,51 @@
 #include "binary_trees.h"
 
-binary_tree_t *findTreeRoot(binary_tree_t *node)
+/**
+ * find_tree_root - finds root of tree given any node in tree
+ * @node: a node in a tree
+ * Return: pointer to root
+ */
+
+binary_tree_t *find_tree_root(binary_tree_t *node)
 {
-	while(node->parent)
+	while (node->parent)
 		node = node->parent;
 	return (node);
 }
+
+
+/**
+ * swap - swaps values in tree to obtain max heap ordering
+ * @new: pointer to node that needs to be sorted
+ * Return: pointer to properly sorted new node
+ */
 
 binary_tree_t *swap(binary_tree_t *new)
 {
 	int tmp;
 
-	while(new->parent && new->parent->n < new->n)
+	while (new->parent && new->parent->n < new->n)
 	{
 		tmp = new->n;
 		new->n = new->parent->n;
 		new->parent->n = tmp;
-
-		/*
-		binary_tree_t *old_parent = new->parent;
-
-		if (old_parent->left == new)
-		{
-			printf("1\n");
-			if (new->left)
-				new->left->parent = old_parent;
-			if (new->right)
-				new->right->parent = old_parent;
-			if (old_parent->right)
-				old_parent->right->parent = new;
-			printf("2\n");
-			new->parent = old_parent->parent;
-			old_parent->parent = new;
-			tmp = old_parent->right;
-			old_parent->right = new->right;
-			new->right = tmp;
-			printf("3\n");
-			old_parent->left = new->left;
-			new->left = old_parent;
-			printf("4\n");
-		}
-		else
-		{
-			if (new->right)
-				new->right->parent = old_parent;
-			if (new->left)
-				new->left->parent = old_parent;
-			if (old_parent->left)
-				old_parent->left->parent = new;
-			new->parent = old_parent->parent;
-			old_parent->parent = new;
-			tmp = old_parent->left;
-			old_parent->left = new->left;
-			new->left = tmp;
-			old_parent->right = new->right;
-			new->right = old_parent;
-		}
-		*/
+		new = new->parent;
 	}
 
-	return findTreeRoot(new);
+	return (new);
 }
 
-struct next_result next(binary_tree_t *tree)
+
+/**
+ * next - finds the next spot to insert in complete binary tree
+ * @tree: pointer to root of tree
+ * Return: struct containing pointer to the next slot in the tree along
+ * with its parent
+ */
+
+next_res next(binary_tree_t *tree)
 {
-	struct next_result next_left = {0, NULL, NULL},
+	next_res next_left = {0, NULL, NULL},
 		next_right = {0, NULL, NULL}, nil = {0, NULL, NULL};
 
 	if (!tree->left)
@@ -90,7 +71,7 @@ struct next_result next(binary_tree_t *tree)
 		else
 			return (next_right);
 	}
-        /* this can't happen. return statement is for compilation purposes */
+	/* this can't happen. return statement is for compilation purposes */
 	return (nil);
 }
 
@@ -105,7 +86,7 @@ struct next_result next(binary_tree_t *tree)
 heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new = NULL;
-	struct next_result res = { 0, NULL, NULL };
+	next_res res = {0, NULL, NULL};
 
 	if (!root)
 		return (NULL);
@@ -119,7 +100,7 @@ heap_t *heap_insert(heap_t **root, int value)
 
 	res = next(*root);
 	*(res.p) = binary_tree_node(res.parent, value);
-	new = *(res.p);
-	*root = swap(new);
+	new = swap(*(res.p));
+	*root = find_tree_root(new);
 	return (new);
 }
