@@ -7,6 +7,9 @@ def minOperations(n):
     """finds min operations to paste n number of Hs into a file using only
     Copy All and Past operations"""
 
+    if n < 2:
+        return 0
+
     primeFactors = []
 
     while n % 2 == 0:
