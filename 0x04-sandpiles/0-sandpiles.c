@@ -46,29 +46,22 @@ void cascade_top(int sum[3][3])
 			prev[i][j] = sum[i][j];
 	if (prev[0][0] > 3)
 	{
-		sum[0][0] = sum[0][0] - 2;
-		if (prev[0][1] < 3)
-			sum[0][0] = sum[0][0] - 1, sum[0][1] = sum[0][1] + 1;
-		if (prev[1][0] < 3)
-			sum[0][0] = sum[0][0] - 1, sum[1][0] = sum[1][0] + 1;
+		sum[0][0] = sum[0][0] - 4;
+		sum[0][1] = sum[0][1] + 1;
+		sum[1][0] = sum[1][0] + 1;
 	}
 	if (prev[0][1] > 3)
 	{
-		sum[0][1] = sum[0][1] - 1;
-		if (prev[0][0] < 3)
-			sum[0][1] = sum[0][1] - 1, sum[0][0] = sum[0][0] + 1;
-		if (prev[0][2] < 3)
-			sum[0][1] = sum[0][1] - 1, sum[0][2] = sum[0][2] + 1;
-		if (prev[1][1] < 3)
-			sum[0][1] = sum[0][1] - 1, sum[1][1] = sum[1][1] + 1;
+		sum[0][1] = sum[0][1] - 4;
+		sum[0][0] = sum[0][0] + 1;
+		sum[0][2] = sum[0][2] + 1;
+		sum[1][1] = sum[1][1] + 1;
 	}
 	if (prev[0][2] > 3)
 	{
-		sum[0][2] = sum[0][2] - 2;
-		if (prev[0][1] < 3)
-			sum[0][2] = sum[0][2] - 1, sum[0][1] = sum[0][1] + 1;
-		if (prev[1][2] < 3)
-			sum[0][2] = sum[0][2] - 1, sum[1][2] = sum[1][2] + 1;
+		sum[0][2] = sum[0][2] - 4;
+		sum[0][1] = sum[0][1] + 1;
+		sum[1][2] = sum[1][2] + 1;
 	}
 	cascade_mid(prev, sum);
 }
@@ -84,34 +77,25 @@ void cascade_mid(int prev[3][3], int sum[3][3])
 {
 	if (prev[1][0] > 3)
 	{
-		sum[1][0] = sum[1][0] - 1;
-		if (prev[0][0] < 3)
-			sum[1][0] = sum[1][0] - 1, sum[0][0] = sum[0][0] + 1;
-		if (prev[2][0] < 3)
-			sum[1][0] = sum[1][0] - 1, sum[2][0] = sum[2][0] + 1;
-		if (prev[1][1] < 3)
-			sum[1][0] = sum[1][0] - 1, sum[1][1] = sum[1][1] + 1;
+		sum[1][0] = sum[1][0] - 4;
+		sum[0][0] = sum[0][0] + 1;
+		sum[2][0] = sum[2][0] + 1;
+		sum[1][1] = sum[1][1] + 1;
 	}
 	if (prev[1][1] > 3)
 	{
-		if (prev[0][1] < 3)
-			sum[1][1] = sum[1][1] - 1, sum[0][1] = sum[0][1] + 1;
-		if (prev[1][0] < 3)
-			sum[1][1] = sum[1][1] - 1, sum[1][0] = sum[1][0] + 1;
-		if (prev[2][1] < 3)
-			sum[1][1] = sum[1][1] - 1, sum[2][1] = sum[2][1] + 1;
-		if (prev[1][2] < 3)
-			sum[1][1] = sum[1][1] - 1, sum[1][2] = sum[1][2] + 1;
+		sum[1][1] = sum[1][1] - 4;
+		sum[0][1] = sum[0][1] + 1;
+		sum[1][0] = sum[1][0] + 1;
+		sum[2][1] = sum[2][1] + 1;
+		sum[1][2] = sum[1][2] + 1;
 	}
 	if (prev[1][2] > 3)
 	{
-		sum[1][2] = sum[1][2] - 1;
-		if (prev[0][2] < 3)
-			sum[1][2] = sum[1][2] - 1, sum[0][2] = sum[0][2] + 1;
-		if (prev[2][2] < 3)
-			sum[1][2] = sum[1][2] - 1, sum[2][2] = sum[2][2] + 1;
-		if (prev[1][1] < 3)
-			sum[1][2] = sum[1][2] - 1, sum[1][1] = sum[1][1] + 1;
+		sum[1][2] = sum[1][2] - 4;
+		sum[0][2] = sum[0][2] + 1;
+		sum[2][2] = sum[2][2] + 1;
+		sum[1][1] = sum[1][1] + 1;
 	}
 	cascade_bottom(prev, sum);
 }
@@ -127,29 +111,22 @@ void cascade_bottom(int prev[3][3], int sum[3][3])
 {
 	if (prev[2][0] > 3)
 	{
-		sum[2][0] = sum[2][0] - 2;
-		if (prev[1][0] < 3)
-			sum[2][0] = sum[2][0] - 1, sum[1][0] = sum[1][0] + 1;
-		if (prev[2][1] < 3)
-			sum[2][0] = sum[2][0] - 1, sum[2][1] = sum[2][1] + 1;
+		sum[2][0] = sum[2][0] - 4;
+		sum[1][0] = sum[1][0] + 1;
+		sum[2][1] = sum[2][1] + 1;
 	}
 	if (prev[2][1] > 3)
 	{
-		sum[2][1] = sum[2][1] - 1;
-		if (prev[2][0] < 3)
-			sum[2][1] = sum[2][1] - 1, sum[2][0] = sum[2][0] + 1;
-		if (prev[2][2] < 3)
-			sum[2][1] = sum[2][1] - 1, sum[2][2] = sum[2][2] + 1;
-		if (prev[1][1] < 3)
-			sum[2][1] = sum[2][1] - 1, sum[1][1] = sum[1][1] + 1;
+		sum[2][1] = sum[2][1] - 4;
+		sum[2][0] = sum[2][0] + 1;
+		sum[2][2] = sum[2][2] + 1;
+		sum[1][1] = sum[1][1] + 1;
 	}
 	if (prev[2][2] > 3)
 	{
-		sum[2][2] = sum[2][2] - 2;
-		if (prev[1][2] < 3)
-			sum[2][2] = sum[2][2] - 1, sum[1][2] = sum[1][2] + 1;
-		if (prev[2][1] < 3)
-			sum[2][2] = sum[2][2] - 1, sum[2][1] = sum[2][1] + 1;
+		sum[2][2] = sum[2][2] - 4;
+		sum[1][2] = sum[1][2] + 1;
+		sum[2][1] = sum[2][1] + 1;
 	}
 	check_stable(sum);
 }
