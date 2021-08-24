@@ -29,7 +29,7 @@ int is_palindrome(listint_t **head)
 			end = end->next;
 			++j;
 		}
-		if (start->n != end-> n)
+		if (start->n != end->n)
 			return (0);
 		start = start->next;
 	}
