@@ -1,31 +1,5 @@
 #include "lists.h"
 
-int is_pal_rec(listint_t **head, listint_t *start, listint_t *end, int len)
-{
-	listint_t *current;
-	int i;
-
-	if (end->next)
-	{
-		current = *head;
-		for (i = 0; i < len - 1; ++i)
-		{
-			current = current->next;
-		}
-		len--;
-		printf("current n %d\n", current->n);
-		printf("len %d\n", len);
-		is_pal_rec(head, current, end->next, len);
-	}
-
-	printf("start n %d\n", start->n);
-	printf("end n %d\n", end->n);
-	if (start->n != end->n)
-		return (0);
-
-	return (1);
-}
-
 /**
  * is_palindrome - determines if singly linked list is a palindrome
  * @head: pointer to pointer of first node of listint_t list
@@ -34,8 +8,8 @@ int is_pal_rec(listint_t **head, listint_t *start, listint_t *end, int len)
 
 int is_palindrome(listint_t **head)
 {
-	listint_t *current = *head;
-	int len = 0;
+	listint_t *current = *head, *start = *head, *end = *head;
+	int len = 0, i = 0, j = 0;
 
 	if (!head || !(*head))
 		return (1);
@@ -45,6 +19,20 @@ int is_palindrome(listint_t **head)
 		current = current->next;
 		len++;
 	}
+	printf("len %d\n", len);
+	for (i = 0; i < len / 2; ++i)
+	{
+		j = i + 1;
+		end = *head;
+		while (j < len)
+		{
+			end = end->next;
+			++j;
+		}
+		if (start->n != end-> n)
+			return (0);
+		start = start->next;
+	}
 
-	return is_pal_rec(head, *head, *head, len);
+	return (1);
 }
