@@ -19,7 +19,7 @@ int is_palindrome(listint_t **head)
 		current = current->next;
 		len++;
 	}
-	printf("len %d\n", len);
+
 	for (i = 0; i < len / 2; ++i)
 	{
 		j = i + 1;
