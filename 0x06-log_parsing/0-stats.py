@@ -33,10 +33,10 @@ try:
                 int(num)
             except:
                 skip = True
-                continue
+                break
             if int(num) not in range(1, 256):
                 skip = True
-                continue
+                break
         if skip:
             continue
 
