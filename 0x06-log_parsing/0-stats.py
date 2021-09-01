@@ -22,50 +22,20 @@ try:
             print_info(total_size, status_counts)
             line_count = 0
 
-        if '[' in line and ']' in line:
-            before_date = line.split('[')[0]
-            after_date = line.split(']')[1]
-            line_parts = (before_date + after_date).split()
-        else:
-            continue
-
-        ip = line_parts[0].split('.')
-        if len(ip) != 4:
-            continue
-        for num in ip:
-            try:
-                int(num)
-            except:
-                skip = True
-                break
-            if int(num) not in range(1, 256):
-                skip = True
-                break
-        if skip:
-            continue
-
-        if line_parts[1] != "-":
-            continue
-
-        if line_parts[2] != '"GET' \
-           or line_parts[3] != '/projects/260' \
-                               or line_parts[4] != 'HTTP/1.1"':
-            continue
+        line_parts = line.split()
 
         try:
-            int(line_parts[5])
+            int(line_parts[-2])
+            status_counts[line_parts[-2]] += 1
         except:
-            continue
-        if int(line_parts[5]) not in [200, 301, 400, 401, 403, 404, 405, 500]:
-            continue
+            pass
 
         try:
-            int(line_parts[6])
+            int(line_parts[-1])
+            total_size += int(line_parts[-1])
         except:
-            continue
+            pass
 
-        status_counts[line_parts[5]] += 1
-        total_size += int(line_parts[6])
     print_info(total_size, status_counts)
 
 except KeyboardInterrupt:
