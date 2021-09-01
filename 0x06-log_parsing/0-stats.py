@@ -13,6 +13,7 @@ try:
     line_count = -1
     status_counts = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
                      '404': 0, '405': 0, '500': 0}
+    valid_codes = [200, 301, 400, 401, 403, 404, 405, 500]
     total_size = 0
 
     for line in sys.stdin:
@@ -25,7 +26,8 @@ try:
 
         try:
             int(line_parts[-2])
-            status_counts[line_parts[-2]] += 1
+            if int(line_parts[-2]) in valid_codes:
+                status_counts[line_parts[-2]] += 1
         except (ValueError, IndexError):
             pass
 
