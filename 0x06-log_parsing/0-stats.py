@@ -16,7 +16,6 @@ try:
     total_size = 0
 
     for line in sys.stdin:
-        skip = False
         line_count += 1
         if line_count == 10:
             print_info(total_size, status_counts)
