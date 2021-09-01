@@ -3,6 +3,11 @@
 import sys
 
 
+def print_info(total_size, status_counts):
+    print("File size: {}".format(total_size))
+    for key, value in sorted(status_counts.items()):
+        print("{}: {}".format(key, value))
+
 try:
     line_count = -1
     status_counts = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
@@ -13,9 +18,7 @@ try:
         skip = False
         line_count += 1
         if line_count == 10:
-            print("File size: {}".format(total_size))
-            for key, value in sorted(status_counts.items()):
-                print("{}: {}".format(key, value))
+            print_info(total_size, status_counts)
             line_count = 0
 
         if '[' in line and ']' in line:
@@ -62,8 +65,7 @@ try:
 
         status_counts[line_parts[5]] += 1
         total_size += int(line_parts[6])
+    print_info(total_size, status_counts)
 
 except KeyboardInterrupt:
-    print("File size: {}".format(total_size))
-    for key, value in sorted(status_counts.items()):
-        print("{}: {}".format(key, value))
+    print_info(total_size, status_counts)
