@@ -26,13 +26,13 @@ try:
         try:
             int(line_parts[-2])
             status_counts[line_parts[-2]] += 1
-        except:
+        except (ValueError, IndexError):
             pass
 
         try:
             int(line_parts[-1])
             total_size += int(line_parts[-1])
-        except:
+        except (ValueError, IndexError):
             pass
 
     print_info(total_size, status_counts)
