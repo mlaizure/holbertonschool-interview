@@ -6,7 +6,8 @@ import sys
 def print_info(total_size, status_counts):
     print("File size: {}".format(total_size))
     for key, value in sorted(status_counts.items()):
-        print("{}: {}".format(key, value))
+        if value > 0:
+            print("{}: {}".format(key, value))
 
 try:
     line_count = -1
