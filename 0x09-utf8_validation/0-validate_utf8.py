@@ -27,6 +27,8 @@ def readValidUTF8Char(data):
            hasBitsPrefix(data[3], '10'):
             return False
         return data[4:]
+    else:
+        return False
 
 
 def validUTF8(data):
