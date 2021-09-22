@@ -3,6 +3,7 @@
 
 
 def readValidUTF8SuccessorBytes(data, size):
+    """checks length and successor bytes for correct prefix"""
     if len(data) < size:
         return False
     for i in range(size):
