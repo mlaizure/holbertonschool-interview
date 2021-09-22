@@ -22,11 +22,11 @@ def readValidUTF8Char(data):
     if hasBitsPrefix(data[0], '0'):
         return data[1:]
     elif hasBitsPrefix(data[0], '110'):
-        return readValidUTF8SuccessorBytes(data[1:], 2)
+        return readValidUTF8SuccessorBytes(data[1:], 1)
     elif hasBitsPrefix(data[0], '1110'):
-        return readValidUTF8SuccessorBytes(data[1:], 3)
+        return readValidUTF8SuccessorBytes(data[1:], 2)
     elif hasBitsPrefix(data[0], '11110'):
-        return readValidUTF8SuccessorBytes(data[1:], 4)
+        return readValidUTF8SuccessorBytes(data[1:], 3)
     else:
         return False
 
