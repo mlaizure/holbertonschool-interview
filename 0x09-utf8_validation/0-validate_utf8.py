@@ -10,24 +10,27 @@ def hasBitsPrefix(n, s):
 
 def readValidUTF8Char(data):
     """reads a character if valid"""
-    if hasBitsPrefix(data[0], '0'):
-        return data[1:]
-    elif hasBitsPrefix(data[0], '110'):
-        if not hasBitsPrefix(data[1], '10'):
+    try:
+        if hasBitsPrefix(data[0], '0'):
+            return data[1:]
+        elif hasBitsPrefix(data[0], '110'):
+            if not hasBitsPrefix(data[1], '10'):
+                return False
+            return data[2:]
+        elif hasBitsPrefix(data[0], '1110'):
+            if not hasBitsPrefix(data[1], '10') or not \
+               hasBitsPrefix(data[2], '10'):
+                return False
+            return data[3:]
+        elif hasBitsPrefix(data[0], '11110'):
+            if not hasBitsPrefix(data[1], '10') or not \
+               hasBitsPrefix(data[2], '10') or not \
+               hasBitsPrefix(data[3], '10'):
+                return False
+            return data[4:]
+        else:
             return False
-        return data[2:]
-    elif hasBitsPrefix(data[0], '1110'):
-        if not hasBitsPrefix(data[1], '10') or not \
-           hasBitsPrefix(data[2], '10'):
-            return False
-        return data[3:]
-    elif hasBitsPrefix(data[0], '11110'):
-        if not hasBitsPrefix(data[1], '10') or not \
-           hasBitsPrefix(data[2], '10') or not \
-           hasBitsPrefix(data[3], '10'):
-            return False
-        return data[4:]
-    else:
+    except IndexError:
         return False
 
 
