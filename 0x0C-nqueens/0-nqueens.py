@@ -22,6 +22,5 @@ def get_n():
     return n
 
 
-
 if __name__ == "__main__":
     get_n()
