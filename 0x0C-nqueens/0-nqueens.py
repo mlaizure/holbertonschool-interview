@@ -98,4 +98,4 @@ def solve_nqueens(idx, queens_found, board):
 
 
 if __name__ == "__main__":
-    get_n()
+    n_queens()
