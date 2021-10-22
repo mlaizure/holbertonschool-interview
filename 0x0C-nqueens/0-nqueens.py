@@ -42,13 +42,13 @@ def col_has_queen(board, col):
 
 def diag_has_queen(board, row, col):
     """check diagonals for queens"""
-    for i, j in zip(range(row, -1, -1),
-                    range(col, -1, -1)):
+    n = len(board[0])
+
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
         if board[i][j]:
             return True
 
-    for i, j in zip(range(row, len(board[0]), 1),
-                    range(col, -1, -1)):
+    for i, j in zip(range(row, -1, -1), range(col, n, 1)):
         if board[i][j]:
             return True
 
@@ -71,22 +71,29 @@ def n_queens():
 def solve_nqueens(idx, queens_found, board):
     """recursive backtracking"""
     n = len(board[0])
-    ijs = [(j, i) for j in range(n) for i in range(n)]
-    if queens_found == n:
-        print_board(board, n)
-        return True
-    elif idx >= len(ijs):
+    a = False
+
+    if idx >= n ** 2:
         return False
-    i, j = ijs[idx]
+
+    i, j = [(j, i) for j in range(n) for i in range(n)][idx]
+
     if not row_has_queen(board, i) and not col_has_queen(board, j) \
        and not diag_has_queen(board, i, j):
-        queens_found += 1
-    b_true = [row[:] for row in board]
+        b_true = [row[:] for row in board]
+        b_true[i][j] = True
+
+        if queens_found + 1 == n:
+            print_board(b_true, n)
+            return True
+
+        a = solve_nqueens(idx + 1, queens_found + 1, b_true)
+
     b_false = [row[:] for row in board]
-    b_true[i][j] = True
     b_false[i][j] = False
-    if solve_nqueens(idx + 1, queens_found, b_true) or \
-       solve_nqueens(idx + 1, queens_found, b_false):
+    b = solve_nqueens(idx + 1, queens_found, b_false)
+
+    if a or b:
         return True
 
 
