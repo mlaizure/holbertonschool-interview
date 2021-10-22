@@ -21,7 +21,7 @@ def get_n():
 
     return n
 
-
+"""
 def row_has_queen(board, row):
     """check row for other queens"""
     for has_queen in board[row]:
@@ -95,7 +95,7 @@ def solve_nqueens(idx, queens_found, board):
 
     if a or b:
         return True
-
+"""
 
 if __name__ == "__main__":
-    n_queens()
+    get_n()
