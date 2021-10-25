@@ -47,7 +47,6 @@ avl_t *generate_avl(int *array, avl_t *prev, int start, int end)
 	return (new);
 }
 
-
 /**
  * sorted_array_to_avl - builds an AVL tree from a sorted array
  * @array: pointer to the first element of the array to be converted
