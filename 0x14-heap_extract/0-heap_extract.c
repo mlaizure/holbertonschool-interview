@@ -16,9 +16,12 @@ heap_t *heap_rebuild(heap_t **subtree_root)
 {
 	heap_t *subtree = *subtree_root;
 
-	printf("%d\n", subtree->n);
 	if (!subtree->left && !subtree->right)
+	{
+		free(*subtree_root);
+		*subtree_root = NULL;
 		return (NULL);
+	}
 	if (check_children(subtree) == 0)
 	{
 		subtree->n = subtree->left->n;
@@ -30,6 +33,34 @@ heap_t *heap_rebuild(heap_t **subtree_root)
 		heap_rebuild(&subtree->right);
 	}
 	return subtree;
+}
+
+short int place_child(heap_t *t, *n) {
+	short int placed_left = 0, placed_right = 0;
+
+	if (!t->left && !t->right) {
+		return 0
+	}
+	else if (!t->left) {
+		t->left->n = n->n;
+		return 1;
+	}
+	else if (!t->right) {
+		t->right->n = n->n;
+		return 1;
+	}
+	else if (n->n > t->n) {
+		placed_left = place_child(t->left);
+		if (!placed_left)
+			placed_right = place_child(t->right);
+
+		if (placed_left || placed_right)
+			return 1;
+		else
+			return 0;
+	}
+	else
+		return 0;
 }
 
 /**
